@@ -808,12 +808,12 @@
 
     <!-- JS for product alert -->
     <script>
-        $(function() {
+        $(document).ready(function() {
             var alert = $(".alert-container");
 
             alert.hide();
 
-            $("a").click(function(e) {
+            $("#btn-standard").click(function(e) {
                 e.preventDefault();
                 alert.slideDown();
                 window.setTimeout(function() {
