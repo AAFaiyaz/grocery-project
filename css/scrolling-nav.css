@@ -27,3 +27,28 @@ body {
     margin-left: .1rem;
     margin-right: .1rem;
 }
+
+.btn {
+    margin-left: 5px;
+}
+
+.price {
+    margin-left: 1rem;
+}
+
+.modal-footer {
+    padding-top: 0rem;
+}
+
+.table-image thead td,
+th {
+    border: 0;
+    color: #666;
+    font-size: 0.8rem;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.table-image .qty {
+    max-width: 5rem;
+}
