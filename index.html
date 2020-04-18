@@ -8,13 +8,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Shop Homepage - Start Bootstrap Template</title>
+    <title>Grocery Products | Home</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/scrolling-nav.css" rel="stylesheet">
+    <link href="css/fontawesome.min.css" rel="stylesheet">
 
 </head>
 
@@ -47,30 +48,29 @@
                           Groceries
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
                             <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Frozen Food</a>
                                 <ul class="dropdown-menu">
-                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Sea Foods</a>
+                                    <li><a class="dropdown-item" href="#">Hamburgers Patties</a></li>
+
+                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Fish Fingers</a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Fish Fingers (large)</a></li>
-                                            <li><a class="dropdown-item" href="#">Fish Fingers (small)</a></li>
-                                            <li><a class="dropdown-item" href="#">Shelled Prawns</a></li>
+                                            <li><a class="dropdown-item" href="#">500 Gram</a></li>
+                                            <li><a class="dropdown-item" href="#">1000 Gram</a></li>
                                         </ul>
                                     </li>
 
-                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Milk Products</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Tub Ice Cream (1 litre)</a></li>
-                                            <li><a class="dropdown-item" href="#">Tub Ice Cream (2 litre)</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Other</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Hamburgers Patties</a></li>
-                                        </ul>
-                                    </li>
+                                    <li><a class="dropdown-item" href="#">Shelled Prawns</a></li>
 
+                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Tub Ice Cream</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">1 litre</a></li>
+                                            <li><a class="dropdown-item" href="#">2 litre</a></li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
+
                             <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Fresh Food</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">T'Bone Steak</a></li>
@@ -86,21 +86,78 @@
                                     <li><a class="dropdown-item" href="#">Grapes</a></li>
                                     <li><a class="dropdown-item" href="#">Apples</a></li>
                                     <li><a class="dropdown-item" href="#">Peaches</a></li>
-
                                 </ul>
                             </li>
-                            <li><a class="dropdown-item" href="#">Beverages</a></li>
-                            <li><a class="dropdown-item" href="#">Home Health</a></li>
-                            <li><a class="dropdown-item" href="#">Pet Food</a></li>
+
+                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Beverages</a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Coffee</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">200 Gram</a></li>
+                                            <li><a class="dropdown-item" href="#">500 Gram</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Earl Grey Tea Bags</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Pack 25</a></li>
+                                            <li><a class="dropdown-item" href="#">Pack 100</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Chocolate Bar</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Home Health</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Bath Soap</a></li>
+
+                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Panadol</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Pack 24</a></li>
+                                            <li><a class="dropdown-item" href="#">Bottle 50</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li><a class="dropdown-item" href="#">Washing Powder</a></li>
+
+                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Garbage Bags</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">small (pack 25)</a></li>
+                                            <li><a class="dropdown-item" href="#">large (pack 50)</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Laundry Bleach</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Pet Food</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Bird Food</a></li>
+                                    <li><a class="dropdown-item" href="#">Cat Food</a></li>
+
+                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Dry Dog Food</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">1 kg. Pack</a></li>
+                                            <li><a class="dropdown-item" href="#">5 kg. Pack</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li><a class="dropdown-item" href="#">Fish Food</a></li>
+                                </ul>
+                            </li>
 
                         </ul>
                     </li>
 
                 </ul>
+
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-outline-info my-2 my-sm-0 btn-margin-left" type="submit">Search</button>
                 </form>
+                <button type="button" class="btn btn-outline-dark btn-margin-right" data-toggle="modal" data-target="#cartModal">View Cart</button>
+
             </div>
         </div>
     </nav>
@@ -321,7 +378,7 @@
                                 <a href="#"><img class="card-img-top" src="img\Garbagebags.png" alt=""></a>
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a href="#">Garbage Bages</a>
+                                        <a href="#">Garbage Bags</a>
                                     </h4>
                                     <h5>$34.99</h5>
                                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
@@ -470,17 +527,78 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <h2>Services we offer</h2>
-                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut optio velit inventore, expedita quo laboriosam possimus ea consequatur vitae, doloribus consequuntur ex. Nemo assumenda laborum vel, labore ut velit dignissimos.</p>
+                    <h2>Online Grocery Shopping Australia Offers</h2>
+                    <p>Nowadays the internet has become the best way to do your shopping, but is also the best source of information. Shopping online can truly find you anything you want. is now becoming more popular as it is not only very convenient but
+                        also quite easy and flexible.&nbsp;</p>
+
+                    <h2><strong></strong>Saving Time and Energy</h2>
+                    <p>When going to visit your local supermarket, there is always that chance of waiting in very long lines before being served. These days most peoples time is very significant, especially for those who work and have busy schedules. Shopping
+                        online is proven to save more time, then going to the local stores to shop for your food. All that's required is to spend a few minutes on your computer or laptop o complete your list.&nbsp;</p>
+                    <h3>Fast Delivery</h3>
+                    <p>One of the best things about shopping online is having your goods delivered direct to your doorstep quickly and conveniently. This is ideal for anyone who is a working mother or with a busy schedule. You can choose to order your groceries
+                        from your home or office with Harris Farm Markets.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Your Shopping Cart
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-image productFinal">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Product</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Qty</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="w-25">
+                                    <img src="img/instantcoffee.jpg" class="img-fluid img-thumbnail" alt="Sheep">
+                                </td>
+                                <td>Instant Coffee</td>
+                                <td>89$</td>
+                                <td class="qty"><input type="number" class="form-control product_quantity" id="product_quantity" value="1"></td>
+                                <td>89$</td>
+                                <td>
+                                    <a href="#" class="btn btn-danger btn-sm btnDelete">
+                                        <i class="fas fa-lg fa-window-close"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-end">
+                        <h5>Total: <span class="price text-success">89$</span></h5>
+                    </div>
+                </div>
+                <div class="modal-footer border-top-0 d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+            <p class="m-0 text-center text-white">Copyright &copy; www-student.it.uts.edu.au 2020</p>
         </div>
         <!-- /.container -->
     </footer>
@@ -494,6 +612,17 @@
 
     <!-- Custom JavaScript for this theme -->
     <script src="js/scrolling-nav.js"></script>
+    <script src="js/fontawesome.min.js"></script>
+
+    <script>
+        $('#cartModal').click(function() {
+            $('#cartModal').modal('show');
+        });
+
+        $("#productFinal").on('click', '.btnDelete', function() {
+            $(this).closest('tr').remove();
+        });
+    </script>
 
 </body>
 
