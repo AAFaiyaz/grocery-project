@@ -514,7 +514,7 @@
             </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-image">
+                    <table class="table table-image productFinal">
                         <thead>
                             <tr>
                                 <th scope="col"></th>
@@ -532,10 +532,10 @@
                                 </td>
                                 <td>Instant Coffee</td>
                                 <td>89$</td>
-                                <td class="qty"><input type="number" class="form-control profuct_quantity" id="profuct_quantity" value="1"></td>
+                                <td class="qty"><input type="number" class="form-control product_quantity" id="product_quantity" value="1"></td>
                                 <td>89$</td>
                                 <td>
-                                    <a href="#" class="btn btn-danger btn-sm">
+                                    <a href="#" class="btn btn-danger btn-sm btnDelete">
                                         <i class="fas fa-lg fa-window-close"></i>
                                     </a>
                                 </td>
@@ -576,6 +576,10 @@
     <script>
         $('#cartModal').click(function() {
             $('#cartModal').modal('show');
+        });
+
+        $("#productFinal").on('click', '.btnDelete', function() {
+            $(this).closest('tr').remove();
         });
     </script>
 
