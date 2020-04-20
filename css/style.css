@@ -1,0 +1,47 @@
+body {
+	/*background-color: #5CDB95;*/
+}
+.left-hand-frame {
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+.top-right-frame{
+	width: 50%;
+	float: left;
+	height: 50vh;
+	background-color: #626abb;
+}
+.bottom-right-frame{
+	float: right;
+	width: 50%;
+	height: 50vh;
+	background-color: #14162d;
+}
+
+
+.left-hand-frame .header {
+	width: 100%;
+	border-bottom:1px solid red;
+	text-align: center; 
+}
+
+.top-right-frame .header{
+	width: 100%;
+	border-bottom:1px solid #fff;
+	text-align: center; 
+}
+.bottom-right-frame .header{
+	width: 100%;
+	color: #fff;
+	border-bottom:1px solid #fff;
+	text-align: center; 
+}
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+
+.dropdown>.dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+    pointer-events: none;
+}
