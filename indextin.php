@@ -2,23 +2,127 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $query ="SELECT * FROM `products` ORDER BY product_id ASC";
+    $query ="SELECT * FROM products ORDER BY product_id ASC";
 
     try {
         $connect = new PDO("mysql:host=$servername;dbname=poti", $username, $password);
-
-        $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $result = $connect->query($query);
     }
     catch(PDOException $e)
     {
         echo "Connection failed: " . $e->getMessage();
     }
-?>  
+
+    $message = '';
+
+    if(isset($_POST["add_to_cart"]))
+    {
+    if(isset($_COOKIE["shopping_cart"]))
+    {
+    $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+
+    $cart_data = json_decode($cookie_data, true);
+    }
+    else
+    {
+    $cart_data = array();
+    }
+
+    $item_id_list = array_column($cart_data, 'product_id');
+
+    if(in_array($_POST["hidden_id"], $item_id_list))
+    {
+        foreach($cart_data as $keys => $values)
+        {
+            if($cart_data[$keys]["product_id"] == $_POST["hidden_id"])
+            {
+                $cart_data[$keys]["in_stock"] = $cart_data[$keys]["in_stock"] + $_POST["quantity"];
+            }
+        }
+    }
+    else
+    {
+        $item_array = array(
+            'product_id'   => $_POST["hidden_id"],
+            'product_name'   => $_POST["hidden_name"],
+            'unit_price'  => $_POST["hidden_price"],
+            'unit_quantity'  => $_POST["hidden_quantity"],
+            'in_stock'  => $_POST["quantity"]
+        );
+        $cart_data[] = $item_array;
+    }
+
+    
+    $item_data = json_encode($cart_data);
+
+    $cookie_data = $myArray;
+    setcookie('shopping_cart', $item_data, time() + (86400 * 30));
+    header("location:index.php?success=1");
+    }
+
+    if(isset($_GET["action"]))
+{
+ if($_GET["action"] == "delete")
+ {
+  $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+  $cart_data = json_decode($cookie_data, true);
+  foreach($cart_data as $keys => $values)
+  {
+   if($cart_data[$keys]['product_id'] == $_GET["id"])
+   {
+    unset($cart_data[$keys]);
+    $item_data = json_encode($cart_data);
+    setcookie("shopping_cart", $item_data, time() + (86400 * 30));
+    header("location:index.php?remove=1");
+   }
+  }
+ }
+ if($_GET["action"] == "clear")
+ {
+  setcookie("shopping_cart", "", time() - 3600);
+  header("location:index.php?clearall=1");
+ }
+}
+
+if(isset($_GET["success"]))
+{
+ $message = '
+ <div class="alert alert-success alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    Item Added into Cart
+ </div>
+ ';
+}
+
+if(isset($_GET["remove"]))
+{
+ $message = '
+ <div class="alert alert-success alert-dismissible">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  Item removed from Cart
+ </div>
+ ';
+}
+if(isset($_GET["clearall"]))
+{
+ $message = '
+ <div class="alert alert-success alert-dismissible">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  Your Shopping Cart has been clear...
+ </div>
+ ';
+}
+
+?> 
 <!DOCTYPE html>
 <html>
 
 <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <title>Grocery Product</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -169,39 +273,52 @@
 
                     
             <?php
-                    foreach($result as $row)
+                    $statement = $connect->prepare($query);
+                    $statement->execute();
+                    $result = $statement->fetchAll();
+                    foreach($result as $key => $row)
                     {
-                    echo '
+                    ?>
+                    <?php if($row["product_name"] == "Fish Fingers") 
+                    {?>
+                    
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">                                              
-                        
-                            <a href="#"><img class="card-img-top" src="img\TubIceCream.jpg" alt=""></a>
-                                        
+
+                            <a href="#"><img class="card-img-top" src="img\FishFingers.jpg" alt=""></a>
+                            <form method="post">
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="#">'.$row["product_name"].'</a>
+                                    <a href="#"><?php echo $row["product_name"]; ?></a>
                                 </h4>
-                                <h5>$'.$row["unit_price"].'</h5>
-                                <p class="card-text">Quantity : '.$row["unit_quantity"].' </p>
-                                <p class="card-text">In-Stock : '.$row["in_stock"].'</p>
+                                <h5>$ <?php echo $row["unit_price"]; ?></h5>
+                                <p class="card-text">Quantity : <?php echo $row["unit_quantity"]; ?></p>
+                                <p class="card-text">In-Stock : <?php echo $row["in_stock"]; ?></p>
+                                
                                 <input type="number" name="quantity" value="1" class="form-control" />
-
-                            </div>
-                            
-                            
-                            
+                                <input type="hidden" name="hidden_name" value="<?php echo $row["product_name"]; ?>" />
+                                <input type="hidden" name="hidden_price" value="<?php echo $row["unit_price"]; ?>" />
+                                <input type="hidden" name="hidden_id" value="<?php echo $row["product_id"]; ?>" />
+                            </div>                            
+                                                        
                             <div class="card-footer">
-                                <small class="pull-left">
-                                    <a href="#" id="btn-standard" class="btn btn-outline-success">
-                                        Add to Cart<i class="fas fa-cart-plus"></i> 
-                                    </a>
+                                <small class="container">
+                                    <input type="submit" name="add_to_cart" style="margin-top:5px;" 
+                                    class="btn btn-outline-success btn-standard" value="Add to Cart" />
                                 </small>
                                 
                             </div>
+                            </form>
                         </div>
                     </div>
-                    ';
-                    break;
+
+                    
+                    <?php }else{?>
+                    <!-- Else OR NOimage part  -->
+
+                    <?php
+                    }
+                    // break;
                     }
                     ?>
 
@@ -211,6 +328,57 @@
     <div class="bottom-right-frame">
         <div class="header">
             <h3>checkout Carts</h3>
+            <div class="table-responsive">
+                <?php echo $message; ?>
+                <div align="right">
+                    <a href="index.php?action=clear"><b>Clear Cart</b></a>
+                </div>
+                <table class="table table-bordered">
+                    <tr>
+                    <th width="25%">Item Name</th>
+                    <th width="10%">In Stock</th>
+                    <th width="20%">Price</th>
+                    <th width="15%">Total</th>
+                    <th width="5%">Action</th>
+                    </tr>
+                <?php
+                if(isset($_COOKIE["shopping_cart"]))
+                {
+                    $total = 0;
+                    $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+                    $cart_data = json_decode($cookie_data, true);
+                    foreach($cart_data as $keys => $values)
+                    {
+                ?>
+                    <tr>
+                    <td><?php echo $values["product_name"]; ?></td>
+                    <td><?php echo $values["in_stock"]; ?></td>
+                    <td>$ <?php echo $values["unit_price"]; ?></td>
+                    <td>$ <?php echo number_format($values["in_stock"] * $values["unit_price"], 2);?></td>
+                    <td><a href="index.php?action=delete&id=<?php echo $values["product_id"]; ?>"><span class="text-danger">Remove</span></a></td>
+                    </tr>
+                <?php 
+                    $total = $total + ($values["in_stock"] * $values["unit_price"]);
+                    }
+                ?>
+                    <tr>
+                    <td colspan="3" align="right">Total</td>
+                    <td align="right">$ <?php echo number_format($total, 2); ?></td>
+                    <td></td>
+                    </tr>
+                <?php
+                }
+                else
+                {
+                    echo '
+                    <tr>
+                    <td colspan="5" align="center">No Item in Cart</td>
+                    </tr>
+                    ';
+                }
+                ?>
+                </table>
+                </div>
         </div>
     </div>
 

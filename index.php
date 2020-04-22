@@ -6,16 +6,6 @@
 
     try {
         $connect = new PDO("mysql:host=$servername;dbname=poti", $username, $password);
-
-        // $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        // $result = $connect->query($query);
-        // $myArray = array(); // make a new array to hold all my data
-
-        // $index = 0;
-        // while($row = $result->fetch()){ // loop to store the data in an associative array.
-        //     $myArray[$index] = $row;
-        //     $index++;
-        // }
     }
     catch(PDOException $e)
     {
@@ -122,226 +112,167 @@ if(isset($_GET["clearall"]))
  ';
 }
 
-?>
-    
+?> 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Grocery Products | Home</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/scrolling-nav.css" rel="stylesheet">
+    <title>Grocery Product</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link href="css/fontawesome.min.css" rel="stylesheet">
 
 </head>
 
-<body id="page-top">
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #e3f2fd;" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand" href="#page-top">Grocery Store</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-            <div class="collapse navbar-collapse" data-hover="dropdown" data-animations="bounceIn fadeInLeft fadeInUp bounceIn" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#page-top">Home
-                        <span class="sr-only">(current)</span>
-                      </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#services">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#products">Products</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Groceries
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-
-                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Frozen Food</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Hamburgers Patties</a></li>
-
-                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Fish Fingers</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">500 Gram</a></li>
-                                            <li><a class="dropdown-item" href="#">1000 Gram</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Shelled Prawns</a></li>
-
-                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Tub Ice Cream</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">1 litre</a></li>
-                                            <li><a class="dropdown-item" href="#">2 litre</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Fresh Food</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">T'Bone Steak</a></li>
-
-                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Chedder Cheese</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">500 Gram</a></li>
-                                            <li><a class="dropdown-item" href="#">1000 Gram</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Navel Oranges</a></li>
-                                    <li><a class="dropdown-item" href="#">Bananas</a></li>
-                                    <li><a class="dropdown-item" href="#">Grapes</a></li>
-                                    <li><a class="dropdown-item" href="#">Apples</a></li>
-                                    <li><a class="dropdown-item" href="#">Peaches</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Beverages</a>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Coffee</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">200 Gram</a></li>
-                                            <li><a class="dropdown-item" href="#">500 Gram</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Earl Grey Tea Bags</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Pack 25</a></li>
-                                            <li><a class="dropdown-item" href="#">Pack 100</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Chocolate Bar</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Home Health</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Bath Soap</a></li>
-
-                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Panadol</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Pack 24</a></li>
-                                            <li><a class="dropdown-item" href="#">Bottle 50</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Washing Powder</a></li>
-
-                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Garbage Bags</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">small (pack 25)</a></li>
-                                            <li><a class="dropdown-item" href="#">large (pack 50)</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Laundry Bleach</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Pet Food</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Bird Food</a></li>
-                                    <li><a class="dropdown-item" href="#">Cat Food</a></li>
-
-                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Dry Dog Food</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">1 kg. Pack</a></li>
-                                            <li><a class="dropdown-item" href="#">5 kg. Pack</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Fish Food</a></li>
-                                </ul>
-                            </li>
-
-                        </ul>
-                    </li>
-
-                </ul>
-
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                    <button class="btn btn-outline-info my-2 my-sm-0 btn-margin-left" type="submit">Search</button>
-                </form>
-                <button type="button" class="btn btn-outline-dark btn-margin-right" data-toggle="modal" data-target="#cartModal">
-                    View Cart <i class="fas fa-shopping-cart"></i></button>
-
-            </div>
+<body>
+    <!-- <div class="container"> -->
+    <div class="left-hand-frame">
+        <div class="header">
+            <h3>GROCERY</h3>
         </div>
-    </nav>
-
-    <!-- Page Content -->
-    <section id="products">
-        <div class="container">
-
-            <div class="row">
-
-                <div class="col-sm-2 sidebar">
-
-                    <h1 class="my-4">Products</h1>
-                    <div class="list-group">
-                        <a href="#" class="list-group-item">Frozen Food</a>
-                        <a href="#" class="list-group-item">Fresh Food</a>
-                        <a href="#" class="list-group-item">Beverage</a>
-                        <a href="#" class="list-group-item">Home Health</a>
-                        <a href="#" class="list-group-item">Pet Food</a>
-                    </div>
-
-                </div>
-                <!-- /.col-lg-2 -->
-
-                <div class="col-lg-8 middle-section">
-
-                    <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active">
-                                <img class="d-block img-fluid" src="img\pic4.jpg" alt="First slide">
+        <div class="secondary">
+            <ul class="nav justify-content-between">
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a class="nav-link" href="#" id="dropdownMenuLink" data-toggle="dropdown">Frozen Food</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="#">Hamburger Patiee</a>
+                            <div class="dropdown dropright">
+                                <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Fish Fingers</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">600gram</a>
+                                    <a class="dropdown-item" href="#">1000gram</a>
+                                </div>
                             </div>
-                            <div class="carousel-item">
-                                <img class="d-block img-fluid" src="img\pic2.jpg" alt="Sencond slide">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block img-fluid" src="img\pic3.png" alt="Third slide">
+
+                            <a class="dropdown-item" href="#">Shelled Prawns</a>
+
+                            <div class="dropdown dropright">
+                                <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Tub Ice Cream</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">1 Litre</a>
+                                    <a class="dropdown-item" href="#">2 Litre</a>
+                                </div>
                             </div>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Fresh Food</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="#">TBone Steak</a>
+                            <div class="dropdown dropright">
+                                <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Cheddar Cheese</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">500gram</a>
+                                    <a class="dropdown-item" href="#">1000gram</a>
+                                </div>
+                            </div>
+                            <a class="dropdown-item" href="#">Navel Oranges</a>
+                            <a class="dropdown-item" href="#">Bananas</a>
+                            <a class="dropdown-item" href="#">Grapes</a>
+                            <a class="dropdown-item" href="#">Apples</a>
+                            <a class="dropdown-item" href="#">Peaches</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Bevarges</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown dropright">
+                                <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Coffee</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">200gram</a>
+                                    <a class="dropdown-item" href="#">600gram</a>
+                                </div>
+                            </div>
+
+                            <div class="dropdown dropright">
+                                <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Earl Grey Tea Bags</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Pack25</a>
+                                    <a class="dropdown-item" href="#">Pack100</a>
+                                    <a class="dropdown-item" href="#">Pack200</a>
+                                </div>
+                            </div>
+
+                            <a class="dropdown-item" href="#">Chocolate Bar</a>
+
+
+                        </div>
                     </div>
 
-                    <div class="row">
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Home Health</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="#">Bath Soap</a>
+                            <div class="dropdown dropright">
+                                <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Panadol Washing Powder</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Pack24</a>
+                                    <a class="dropdown-item" href="#">Bottle50</a>
+                                </div>
+                            </div>
+
+                            <div class="dropdown dropright">
+                                <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Garbage Bags</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Small (Pack10)</a>
+                                    <a class="dropdown-item" href="#">Large (Pack50)</a>
+                                </div>
+                            </div>
+
+                            <a class="dropdown-item" href="#">Laundry Bleach</a>
+
+                        </div>
+                    </div>
+
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Pet Food</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="#">Bird Food</a>
+
+                            <a class="dropdown-item" href="#">Cat Food</a>
+
+                            <div class="dropdown dropleft">
+                                <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Dry Dog Food</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">1Kg Pack</a>
+                                    <a class="dropdown-item" href="#">5Kg Pack</a>
+                                </div>
+                            </div>
+                            <a class="dropdown-item" href="#">Fish Food</a>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+    </div>
+
+    <div class="top-right-frame">
+        <div class="header">
+            <h3>Products</h3>
+            
+            <div class="row container">
 
                     
-                    <?php
+            <?php
                     $statement = $connect->prepare($query);
                     $statement->execute();
                     $result = $statement->fetchAll();
@@ -390,74 +321,22 @@ if(isset($_GET["clearall"]))
                     // break;
                     }
                     ?>
-                    
-                    </div>
-                    <!-- /.row -->
-
-                </div>
-                <!-- /.col-lg-8 -->
-
-                <div class="col-sm-2 checkout-section">
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-muted">Your cart</span>
-                        <span class="badge badge-secondary badge-pill">3</span>
-                    </h4>
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Product name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$12</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Second product</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$8</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Third item</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$5</span>
-                        </li>
-                        <!-- <li class="list-group-item d-flex justify-content-between bg-light">
-                          <div class="text-success">
-                            <h6 class="my-0">Promo code</h6>
-                            <small>EXAMPLECODE</small>
-                          </div>
-                          <span class="text-success">-$5</span>
-                        </li> -->
-                        <li class="list-group-item d-flex justify-content-between">
-                            <span>Total (USD)</span>
-                            <strong>$20</strong>
-                        </li>
-                    </ul>
-                </div>
 
             </div>
-            <!-- /.row -->
-
         </div>
-    </section>
-    <!-- /.container -->
-
-    <section id="services" class="bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                <h3>Order Details</h3>
-                <div class="table-responsive">
+    </div>
+    <div class="bottom-right-frame">
+        <div class="header">
+            <h3>Checkout Cart</h3>
+            <div class="table-responsive">
                 <?php echo $message; ?>
                 <div align="right">
-                    <a href="index.php?action=clear"><b>Clear Cart</b></a>
+                    <a href="index.php?action=clear" class="btn btn-info"><b>Clear Cart</b></a>
                 </div>
-                <table class="table table-bordered">
+                <br/>
+                <table class="table table-bordered table-dark">
                     <tr>
-                    <th width="40%">Item Name</th>
+                    <th width="25%">Item Name</th>
                     <th width="10%">In Stock</th>
                     <th width="20%">Price</th>
                     <th width="15%">Total</th>
@@ -477,7 +356,7 @@ if(isset($_GET["clearall"]))
                     <td><?php echo $values["in_stock"]; ?></td>
                     <td>$ <?php echo $values["unit_price"]; ?></td>
                     <td>$ <?php echo number_format($values["in_stock"] * $values["unit_price"], 2);?></td>
-                    <td><a href="index.php?action=delete&id=<?php echo $values["product_id"]; ?>"><span class="text-danger">Remove</span></a></td>
+                    <td><a href="index.php?action=delete&id=<?php echo $values["product_id"]; ?>" class="btn btn-sm btn-danger">Remove</a></td>
                     </tr>
                 <?php 
                     $total = $total + ($values["in_stock"] * $values["unit_price"]);
@@ -501,107 +380,22 @@ if(isset($_GET["clearall"]))
                 ?>
                 </table>
                 </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Cart Modal -->
-    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header border-bottom-0">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        Your Shopping Cart
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-image" id="productFinal">
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Product</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Qty</th>
-                                <th scope="col">Total</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="w-25">
-                                    <img src="img/instantcoffee.jpg" class="img-fluid img-thumbnail" alt="Sheep">
-                                </td>
-                                <td>Instant Coffee</td>
-                                <td>89$</td>
-                                <td class="qty"><input type="number" class="form-control product_quantity" id="product_quantity" value="1"></td>
-                                <td>89$</td>
-                                <td>
-                                    <a href="#" class="btn btn-danger btn-sm btnDelete">
-                                        <i class="fas fa-lg fa-window-close"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="d-flex justify-content-end">
-                        <h5>Total: <span class="price text-success">89$</span></h5>
-                    </div>
-                </div>
-                <div class="modal-footer border-top-0 d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Checkout</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Product Aleart -->
-    <div class="alert-container">
-        <div class="alert-custom">
-            Product has been added to list.
         </div>
     </div>
 
     <!-- Back-To-Top -->
     <a href="#" id="back-to-top" style="display: none;"><span></span></a>
 
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; www-student.it.uts.edu.au 2020</p>
-        </div>
-        <!-- /.container -->
-    </footer>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom JavaScript for this theme -->
-    <script src="js/scrolling-nav.js"></script>
     <script src="js/fontawesome.min.js"></script>
 
-    <!-- Shopping Cart JS -->
-    <script>
-        $('#cartModal').click(function() {
-            $('#cartModal').modal('show');
-        });
-
-        $(document).ready(function() {
-
-            $("#productFinal").on('click', '.btnDelete', function() {
-                $(this).closest('tr').remove();
-                $('#cartModal').modal('hide');
-            });
-
-        });
-    </script>
-
+    <script src="vendor/jquery/jquery.min.js"></script>
+    
     <!-- JS for Back To TOP -->
     <script>
         $(document).ready(function() {
@@ -618,23 +412,6 @@ if(isset($_GET["clearall"]))
                     scrollTop: 0
                 }, 750);
                 return false;
-            });
-        });
-    </script>
-
-    <!-- JS for product alert -->
-    <script>
-        $(document).ready(function() {
-            var alert = $(".alert-container");
-
-            alert.hide();
-
-            $(".btn-standard").click(function() {
-                // e.preventDefault();
-                alert.slideDown(this.id);
-                window.setTimeout(function() {
-                    alert.slideUp(this.id);
-                }, 1500);
             });
         });
     </script>
