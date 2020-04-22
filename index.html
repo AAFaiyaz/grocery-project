@@ -226,7 +226,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <small class="pull-left">
-                                        <a href="#" id="btn-standard" class="btn btn-outline-success">
+                                        <a href="#" id="1" class="btn btn-outline-success btn-standard">
                                             Add <i class="fas fa-cart-plus"></i> 
                                         </a>
                                     </small>
@@ -251,7 +251,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <small class="pull-left">
-                                        <a href="#" id="btn-standard" class="btn btn-outline-success">
+                                        <a href="#" id="2" class="btn btn-outline-success btn-standard">
                                             Add <i class="fas fa-cart-plus"></i> 
                                         </a>
                                     </small>
@@ -276,7 +276,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <small class="pull-left">
-                                        <a href="#" id="btn-standard" class="btn btn-outline-success">
+                                        <a href="#" id="3" class="btn btn-outline-success btn-standard">
                                             Add <i class="fas fa-cart-plus"></i> 
                                         </a>
                                     </small>
@@ -301,7 +301,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <small class="pull-left">
-                                        <a href="#" id="btn-standard" class="btn btn-outline-success">
+                                        <a href="#" id="4" class="btn btn-outline-success btn-standard">
                                             Add <i class="fas fa-cart-plus"></i> 
                                         </a>
                                     </small>
@@ -814,12 +814,12 @@
 
             alert.hide();
 
-            $("#btn-standard").click(function(e) {
-                e.preventDefault();
-                alert.slideDown();
+            $(".btn-standard").click(function() {
+                // e.preventDefault();
+                alert.slideDown(this.id);
                 window.setTimeout(function() {
-                    alert.slideUp();
-                }, 2500);
+                    alert.slideUp(this.id);
+                }, 1500);
             });
         });
     </script>

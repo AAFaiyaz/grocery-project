@@ -10,6 +10,19 @@
         $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $result = $connect->query($query);
 
+        $myArray = array(); // make a new array to hold all my data
+
+        // $index = 0;
+        // while($row = $result->fetch()){ // loop to store the data in an associative array.
+        //     $myArray[$index] = $row;
+        //     $index++;
+        // }
+
+        // $keys   = array_keys( $myArray );
+        // $values = array_values( $myArray );
+
+        // var_dump( $keys[1] ); 
+        // var_dump( $values[1] );
         }
     catch(PDOException $e)
         {
@@ -56,6 +69,7 @@
                 <thead>
                     <tr>
                         <td>Product ID</td>
+                        <td>Product ID</td>
                         <td>Product Name</td>
                         <td>Unit Price</td>
                         <td>Unit Quantity</td>
@@ -64,12 +78,13 @@
                 </thead>
                 <tbody>
                 <?php
-				foreach($result as $row)
+				foreach($result as $key => $row)
 				{
 					echo '
 					
 							
 						<tr>
+							<td>'.$key.'</td>
 							<td>'.$row["product_id"].'</td>
 							<td>'.$row["product_name"].'</td>
 							<td>'.$row["unit_price"].'</td>

@@ -2,20 +2,20 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $query ="SELECT * FROM `products` ORDER BY product_id ASC";
+    $query ="SELECT * FROM products ORDER BY product_id ASC";
 
     try {
         $connect = new PDO("mysql:host=$servername;dbname=poti", $username, $password);
 
-        $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $result = $connect->query($query);
-        $myArray = array(); // make a new array to hold all my data
+        // $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // $result = $connect->query($query);
+        // $myArray = array(); // make a new array to hold all my data
 
-        $index = 0;
-        while($row = $result->fetch()){ // loop to store the data in an associative array.
-            $myArray[$index] = $row;
-            $index++;
-        }
+        // $index = 0;
+        // while($row = $result->fetch()){ // loop to store the data in an associative array.
+        //     $myArray[$index] = $row;
+        //     $index++;
+        // }
     }
     catch(PDOException $e)
     {
@@ -26,42 +26,39 @@
 
     if(isset($_POST["add_to_cart"]))
     {
-    if(isset($_COOKIE["shopping_cart"]) || $myArray)
+    if(isset($_COOKIE["shopping_cart"]))
     {
-    // $cookie_data = stripslashes($_COOKIE['shopping_cart']);
-    $cookie_data = $myArray;
+    $cookie_data = stripslashes($_COOKIE['shopping_cart']);
 
     $cart_data = json_decode($cookie_data, true);
-    $cart_data = $myArray;
     }
     else
     {
-    // $cart_data = array();
-    $cart_data = $myArray;
+    $cart_data = array();
     }
 
     $item_id_list = array_column($cart_data, 'product_id');
 
     if(in_array($_POST["hidden_id"], $item_id_list))
     {
-    foreach($cart_data as $keys => $values)
-    {
-    if($cart_data[$keys]["product_id"] == $_POST["hidden_id"])
-    {
-        $cart_data[$keys]["in_stock"] = $cart_data[$keys]["in_stock"] + $_POST["quantity"];
-    }
-    }
+        foreach($cart_data as $keys => $values)
+        {
+            if($cart_data[$keys]["product_id"] == $_POST["hidden_id"])
+            {
+                $cart_data[$keys]["in_stock"] = $cart_data[$keys]["in_stock"] + $_POST["quantity"];
+            }
+        }
     }
     else
     {
-    $item_array = $myArray;
-    $item_array = array(
-    'product_id'   => $_POST["hidden_id"],
-    'product_name'   => $_POST["hidden_name"],
-    'unit_price'  => $_POST["hidden_price"],
-    'in_stock'  => $_POST["quantity"]
-    );
-    $cart_data[] = $item_array;
+        $item_array = array(
+            'product_id'   => $_POST["hidden_id"],
+            'product_name'   => $_POST["hidden_name"],
+            'unit_price'  => $_POST["hidden_price"],
+            'unit_quantity'  => $_POST["hidden_quantity"],
+            'in_stock'  => $_POST["quantity"]
+        );
+        $cart_data[] = $item_array;
     }
 
     
@@ -73,62 +70,60 @@
     }
 
     if(isset($_GET["action"]))
-    {
-    if($_GET["action"] == "delete")
-    {
-    $cookie_data = stripslashes($_COOKIE['shopping_cart']);
-    $cart_data = json_decode($cookie_data, true);
-    $cart_data = $myArray;
-    foreach($cart_data as $keys => $values)
-    {
-    if($cart_data[$keys]['product_id'] == $_GET["id"])
-    {
-        unset($cart_data[$keys]);
-        $item_data = json_encode($cart_data);
-        setcookie("shopping_cart", $item_data, time() + (86400 * 30));
-        header("location:index.php?remove=1");
-    }
-    }
-    }
-    if($_GET["action"] == "clear")
-    {
-    // $cookie_data = stripslashes($_COOKIE['shopping_cart']);
-    $cookie_data = $myArray;
-    setcookie("shopping_cart", "", time() - 3600);
-    header("location:index.php?clearall=1");
-    }
-    }
+{
+ if($_GET["action"] == "delete")
+ {
+  $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+  $cart_data = json_decode($cookie_data, true);
+  foreach($cart_data as $keys => $values)
+  {
+   if($cart_data[$keys]['product_id'] == $_GET["id"])
+   {
+    unset($cart_data[$keys]);
+    $item_data = json_encode($cart_data);
+    setcookie("shopping_cart", $item_data, time() + (86400 * 30));
+    header("location:index.php?remove=1");
+   }
+  }
+ }
+ if($_GET["action"] == "clear")
+ {
+  setcookie("shopping_cart", "", time() - 3600);
+  header("location:index.php?clearall=1");
+ }
+}
 
-    if(isset($_GET["success"]))
-    {
-    $message = '
-    <div class="alert alert-success alert-dismissible">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Item Added into Cart
-    </div>
-    ';
-    }
+if(isset($_GET["success"]))
+{
+ $message = '
+ <div class="alert alert-success alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    Item Added into Cart
+ </div>
+ ';
+}
 
-    if(isset($_GET["remove"]))
-    {
-    $message = '
-    <div class="alert alert-success alert-dismissible">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    Item removed from Cart
-    </div>
-    ';
-    }
-    if(isset($_GET["clearall"]))
-    {
-    $message = '
-    <div class="alert alert-success alert-dismissible">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    Your Shopping Cart has been clear...
-    </div>
-    ';
-    }
+if(isset($_GET["remove"]))
+{
+ $message = '
+ <div class="alert alert-success alert-dismissible">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  Item removed from Cart
+ </div>
+ ';
+}
+if(isset($_GET["clearall"]))
+{
+ $message = '
+ <div class="alert alert-success alert-dismissible">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  Your Shopping Cart has been clear...
+ </div>
+ ';
+}
 
 ?>
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -347,14 +342,15 @@
 
                     
                     <?php
-                    foreach($myArray as $key => $row)
+                    $statement = $connect->prepare($query);
+                    $statement->execute();
+                    $result = $statement->fetchAll();
+                    foreach($result as $key => $row)
                     {
                     ?>
                     <?php if($row["product_name"] == "Fish Fingers") 
                     {?>
-
                     
-
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">                                              
 
@@ -462,24 +458,22 @@
                 <table class="table table-bordered">
                     <tr>
                     <th width="40%">Item Name</th>
-                    <th width="10%">Unit Quantity</th>
                     <th width="10%">In Stock</th>
                     <th width="20%">Price</th>
                     <th width="15%">Total</th>
                     <th width="5%">Action</th>
                     </tr>
                 <?php
-                if($myArray)
+                if(isset($_COOKIE["shopping_cart"]))
                 {
                     $total = 0;
-                    // $cookie_data = stripslashes($_COOKIE['shopping_cart']);
-                    // $cart_data = json_decode($cookie_data, true);
-                    foreach($myArray as $keys => $values)
+                    $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+                    $cart_data = json_decode($cookie_data, true);
+                    foreach($cart_data as $keys => $values)
                     {
                 ?>
                     <tr>
                     <td><?php echo $values["product_name"]; ?></td>
-                    <td><?php echo $values["unit_quantity"]; ?></td>
                     <td><?php echo $values["in_stock"]; ?></td>
                     <td>$ <?php echo $values["unit_price"]; ?></td>
                     <td>$ <?php echo number_format($values["in_stock"] * $values["unit_price"], 2);?></td>

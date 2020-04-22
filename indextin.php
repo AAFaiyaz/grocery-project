@@ -184,6 +184,8 @@
                                 <h5>$'.$row["unit_price"].'</h5>
                                 <p class="card-text">Quantity : '.$row["unit_quantity"].' </p>
                                 <p class="card-text">In-Stock : '.$row["in_stock"].'</p>
+                                <input type="number" name="quantity" value="1" class="form-control" />
+
                             </div>
                             
                             
@@ -191,14 +193,10 @@
                             <div class="card-footer">
                                 <small class="pull-left">
                                     <a href="#" id="btn-standard" class="btn btn-outline-success">
-                                        Add <i class="fas fa-cart-plus"></i> 
+                                        Add to Cart<i class="fas fa-cart-plus"></i> 
                                     </a>
                                 </small>
-                                <small class="pull-right">
-                                    <a href="#" class="btn btn-warning">
-                                        Cart <i class="fas fa-shopping-bag"></i> 
-                                    </a>
-                            </small>
+                                
                             </div>
                         </div>
                     </div>
@@ -206,7 +204,7 @@
                     break;
                     }
                     ?>
-                
+
             </div>
         </div>
     </div>
