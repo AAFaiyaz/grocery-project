@@ -65,10 +65,10 @@
         </h1>
         <br />
         <div class="table-responsive">
-            <table id="product_data" class="table table-striped table-bordered">
+            <table id="product_data" class="table table-dark table-striped table-bordered">
                 <thead>
                     <tr>
-                        <td>Product ID</td>
+                        <td>Serial</td>
                         <td>Product ID</td>
                         <td>Product Name</td>
                         <td>Unit Price</td>

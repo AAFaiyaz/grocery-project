@@ -51,7 +51,7 @@
         $cart_data[] = $item_array;
     }
 
-    
+
     $item_data = json_encode($cart_data);
 
     $cookie_data = $myArray;
@@ -112,12 +112,12 @@ if(isset($_GET["clearall"]))
  ';
 }
 
-?> 
+?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -131,135 +131,682 @@ if(isset($_GET["clearall"]))
 </head>
 
 <body>
-    <!-- <div class="container"> -->
+
     <div class="left-hand-frame">
         <div class="header">
             <h3>GROCERY</h3>
         </div>
         <div class="secondary">
             <ul class="nav justify-content-between">
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <a class="nav-link" href="#" id="dropdownMenuLink" data-toggle="dropdown">Frozen Food</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Hamburger Patiee</a>
-                            <div class="dropdown dropright">
-                                <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Fish Fingers</a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">600gram</a>
-                                    <a class="dropdown-item" href="#">1000gram</a>
-                                </div>
-                            </div>
 
-                            <a class="dropdown-item" href="#">Shelled Prawns</a>
-
-                            <div class="dropdown dropright">
-                                <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Tub Ice Cream</a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">1 Litre</a>
-                                    <a class="dropdown-item" href="#">2 Litre</a>
-                                </div>
+             <?php
+                $myquery ="SELECT * FROM products WHERE product_name ='Hamburger Patties'";
+                $statement = $connect->prepare($myquery);
+                $statement->execute();
+                $hamburger = $statement->fetchAll();
+                foreach($hamburger as $key => $row)
+                {
+                ?>
+            <li class="nav-item">
+                <div class="dropdown">
+                    <a class="nav-link" href="#" id="dropdownMenuLink" data-toggle="dropdown">Frozen Food</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown dropright">
+                        <?php if($key < 1){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                        <?php }?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
                             </div>
+                        <?php }?>
                         </div>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Fresh Food</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">TBone Steak</a>
-                            <div class="dropdown dropright">
-                                <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Cheddar Cheese</a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">500gram</a>
-                                    <a class="dropdown-item" href="#">1000gram</a>
-                                </div>
+
+                <?php
+                    $myquery ="SELECT * FROM products WHERE product_name ='Fish Fingers'";
+                    $statement = $connect->prepare($myquery);
+                    $statement->execute();
+                    $Fish = $statement->fetchAll();
+                    foreach($Fish as $key => $row)
+                    {
+                ?>
+                        <div class="dropdown ">
+                        <?php if($key==0){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            <?php }?>
+                            <?php if($key==1){?>
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
                             </div>
-                            <a class="dropdown-item" href="#">Navel Oranges</a>
-                            <a class="dropdown-item" href="#">Bananas</a>
-                            <a class="dropdown-item" href="#">Grapes</a>
-                            <a class="dropdown-item" href="#">Apples</a>
-                            <a class="dropdown-item" href="#">Peaches</a>
+                          <?php }}?>
                         </div>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Bevarges</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown dropright">
-                                <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Coffee</a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">200gram</a>
-                                    <a class="dropdown-item" href="#">600gram</a>
-                                </div>
+
+                <?php
+                $myquery ="SELECT * FROM products WHERE product_name ='Shelled Prawns'";
+                $statement = $connect->prepare($myquery);
+                $statement->execute();
+                $Prawns = $statement->fetchAll();
+                foreach($Prawns as $key => $row)
+                {
+                ?>
+                                                
+                        <div class="dropdown dropright">
+                        <?php if($key < 1){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                        <?php }?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
                             </div>
-
-                            <div class="dropdown dropright">
-                                <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Earl Grey Tea Bags</a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Pack25</a>
-                                    <a class="dropdown-item" href="#">Pack100</a>
-                                    <a class="dropdown-item" href="#">Pack200</a>
-                                </div>
-                            </div>
-
-                            <a class="dropdown-item" href="#">Chocolate Bar</a>
-
-
+                        <?php }?>
                         </div>
-                    </div>
 
-                </li>
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Home Health</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Bath Soap</a>
-                            <div class="dropdown dropright">
-                                <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Panadol Washing Powder</a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Pack24</a>
-                                    <a class="dropdown-item" href="#">Bottle50</a>
-                                </div>
+                <?php
+                    $myquery ="SELECT * FROM products WHERE product_name ='Tub Ice Cream'";
+                    $statement = $connect->prepare($myquery);
+                    $statement->execute();
+                    $Fish = $statement->fetchAll();
+                    foreach($Fish as $key => $row)
+                    {
+                ?>
+                        <div class="dropdown dropright">
+                        <?php if($key==0){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[2]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[2]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            <?php }?>
+                            <?php if($key==1){?>
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[2]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[2]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
                             </div>
-
-                            <div class="dropdown dropright">
-                                <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Garbage Bags</a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Small (Pack10)</a>
-                                    <a class="dropdown-item" href="#">Large (Pack50)</a>
-                                </div>
-                            </div>
-
-                            <a class="dropdown-item" href="#">Laundry Bleach</a>
-
+                          <?php }}?>
                         </div>
+                        
                     </div>
+                </div>
+            </li>
+            <!-- End this Nav Item -->
 
-                </li>
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Pet Food</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Bird Food</a>
-
-                            <a class="dropdown-item" href="#">Cat Food</a>
-
-                            <div class="dropdown dropleft">
-                                <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Dry Dog Food</a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">1Kg Pack</a>
-                                    <a class="dropdown-item" href="#">5Kg Pack</a>
-                                </div>
+            <li class="nav-item">
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Fresh Food</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        
+                        <!-- <a class="dropdown-item" href="#">T Bone Steak</a> -->
+                        <?php
+                        $myquery ="SELECT * FROM products WHERE product_name ='T Bone Steak'";
+                        $statement = $connect->prepare($myquery);
+                        $statement->execute();
+                        $Steak = $statement->fetchAll();
+                        foreach($Steak as $key => $row)
+                        {
+                        ?>
+                                                
+                        <div class="dropdown dropright">
+                        <?php if($key < 1){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                        <?php }?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[2]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[2]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
                             </div>
-                            <a class="dropdown-item" href="#">Fish Food</a>
+                        <?php }?>
                         </div>
-                    </div>
+                                                                    
+                        <!-- <a class="dropdown-item" href="#">Navel Oranges</a> -->
+                        <?php
+                        $myquery ="SELECT * FROM products WHERE product_name ='Navel Oranges'";
+                        $statement = $connect->prepare($myquery);
+                        $statement->execute();
+                        $Oranges = $statement->fetchAll();
+                        foreach($Oranges as $key => $row)
+                        {
+                        ?>
+                                                
+                        <div class="dropdown dropright">
+                        <?php if($key < 1){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                        <?php }?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                        <?php }?>
+                        </div>
 
-                </li>
-            </ul>
-        </div>
+                        <!-- <a class="dropdown-item" href="#">Bananas</a> -->
+                        <?php
+                        $myquery ="SELECT * FROM products WHERE product_name ='Bananas'";
+                        $statement = $connect->prepare($myquery);
+                        $statement->execute();
+                        $Bananas = $statement->fetchAll();
+                        foreach($Bananas as $key => $row)
+                        {
+                        ?>
+                                                
+                        <div class="dropdown dropright">
+                        <?php if($key < 1){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                        <?php }?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php echo $row["product_name"]; ?>"
+                                aria-expanded="false" aria-controls="<?php echo $row["product_name"]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                        <?php }?>
+                        </div>
+
+                        <!-- <a class="dropdown-item" href="#">Grapes</a> -->
+                        <?php
+                        $myquery ="SELECT * FROM products WHERE product_name ='Grapes'";
+                        $statement = $connect->prepare($myquery);
+                        $statement->execute();
+                        $Grapes = $statement->fetchAll();
+                        foreach($Grapes as $key => $row)
+                        {
+                        ?>
+                                                
+                        <div class="dropdown dropright">
+                        <?php if($key < 1){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                        <?php }?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php echo $row["product_name"]; ?>"
+                                aria-expanded="false" aria-controls="<?php echo $row["product_name"]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                        <?php }?>
+                        </div>
+
+                        <!-- <a class="dropdown-item" href="#">Apples</a> -->
+                        <?php
+                        $myquery ="SELECT * FROM products WHERE product_name ='Apples'";
+                        $statement = $connect->prepare($myquery);
+                        $statement->execute();
+                        $Apples = $statement->fetchAll();
+                        foreach($Apples as $key => $row)
+                        {
+                        ?>
+                                                
+                        <div class="dropdown dropright">
+                        <?php if($key < 1){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                        <?php }?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php echo $row["product_name"]; ?>"
+                                aria-expanded="false" aria-controls="<?php echo $row["product_name"]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                        <?php }?>
+                        </div>
+                        
+                        <!-- <a class="dropdown-item" href="#">Peaches</a> -->
+                        <?php
+                        $myquery ="SELECT * FROM products WHERE product_name ='Peaches'";
+                        $statement = $connect->prepare($myquery);
+                        $statement->execute();
+                        $Peaches = $statement->fetchAll();
+                        foreach($Peaches as $key => $row)
+                        {
+                        ?>
+                                                
+                        <div class="dropdown dropright">
+                        <?php if($key < 1){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                        <?php }?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php echo $row["product_name"]; ?>"
+                                aria-expanded="false" aria-controls="<?php echo $row["product_name"]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                        <?php }?>
+                        </div>
+
+                        <?php
+                            $myquery ="SELECT * FROM products WHERE product_name ='Cheddar Cheese'";
+                            $statement = $connect->prepare($myquery);
+                            $statement->execute();
+                            $Cheese = $statement->fetchAll();
+                            foreach($Cheese as $key => $row)
+                            {
+                        ?>
+                        <div class="dropdown ">
+                        <?php if($key==0){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            <?php }?>
+                            <?php if($key==1){?>
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                          <?php }}?>
+                        </div>
+                        <!-- End this Nav Item -->
+
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Bevarges</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        
+                        <?php
+                            $myquery ="SELECT * FROM products WHERE product_name ='Instant Coffee'";
+                            $statement = $connect->prepare($myquery);
+                            $statement->execute();
+                            $Coffee = $statement->fetchAll();
+                            foreach($Coffee as $key => $row)
+                            {
+                        ?>
+                        <div class="dropdown ">
+                        <?php if($key==0){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            <?php }?>
+                            <?php if($key==1){?>
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                          <?php }}?>
+                        </div>
+
+                        <?php
+                        $myquery ="SELECT * FROM products WHERE product_name ='Chocolate Bar'";
+                        $statement = $connect->prepare($myquery);
+                        $statement->execute();
+                        $Chocolate = $statement->fetchAll();
+                        foreach($Chocolate as $key => $row)
+                        {
+                        ?>
+                                                
+                        <div class="dropdown dropleft">
+                        <?php if($key < 1){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                        <?php }?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                        <?php }?>
+                        </div>
+
+                        <?php
+                            $myquery ="SELECT * FROM products WHERE product_name ='Earl Grey Tea Bags'";
+                            $statement = $connect->prepare($myquery);
+                            $statement->execute();
+                            $Earl = $statement->fetchAll();
+                            foreach($Earl as $key => $row)
+                            {
+                        ?>
+                        <div class="dropdown dropright">
+                        <?php if($key==0){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[2]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[2]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            <?php }?>
+                            <?php if($key==1){?>
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[2]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[2]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                          <?php }}?>
+                        </div>
+                        <!-- End this Nav Item -->
+
+                    </div>
+                </div>
+
+            </li>
+
+            <li class="nav-item">
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Home Health</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <!-- <a class="dropdown-item" href="#">Bath Soap</a> -->
+                        <?php
+                        $myquery ="SELECT * FROM products WHERE product_name ='Bath Soap'";
+                        $statement = $connect->prepare($myquery);
+                        $statement->execute();
+                        $Soap = $statement->fetchAll();
+                        foreach($Soap as $key => $row)
+                        {
+                        ?>
+                                                
+                        <div class="dropdown dropright">
+                        <?php if($key < 1){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                        <?php }?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                        <?php }?>
+                        </div>
+                       
+                        <!-- <a class="dropdown-item" href="#">Laundry Bleach</a> -->
+                        <?php
+                        $myquery ="SELECT * FROM products WHERE product_name ='Laundry Bleach'";
+                        $statement = $connect->prepare($myquery);
+                        $statement->execute();
+                        $Laundry = $statement->fetchAll();
+                        foreach($Laundry as $key => $row)
+                        {
+                        ?>
+                                                
+                        <div class="dropdown dropright">
+                        <?php if($key < 1){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                        <?php }?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[1]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                        <?php }?>
+                        </div>
+                    
+                        <?php
+                        $myquery ="SELECT * FROM products WHERE product_name ='Garbage Bags Small'";
+                        $statement = $connect->prepare($myquery);
+                        $statement->execute();
+                        $GBsmall = $statement->fetchAll();
+                        foreach($GBsmall as $key => $row)
+                        {
+                        ?>
+                                                
+                        <div class="dropdown dropright">
+                        <?php if($key < 1){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                        <?php }?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[2]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[2]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                        <?php }?>
+                        </div>
+
+                        <?php
+                        $myquery ="SELECT * FROM products WHERE product_name ='Garbage Bags Large'";
+                        $statement = $connect->prepare($myquery);
+                        $statement->execute();
+                        $GBlarge = $statement->fetchAll();
+                        foreach($GBlarge as $key => $row)
+                        {
+                        ?>
+                                                
+                        <div class="dropdown dropright">
+                        <?php if($key < 1){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                        <?php }?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[2]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[2]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                        <?php }?>
+                        </div>
+
+                        <?php
+                            $myquery ="SELECT * FROM products WHERE product_name ='Panadol'";
+                            $statement = $connect->prepare($myquery);
+                            $statement->execute();
+                            $Panadol = $statement->fetchAll();
+                            foreach($Panadol as $key => $row)
+                            {
+                        ?>
+                        <div class="dropdown">
+                        <?php if($key==0){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php echo $row["product_name"]; ?>"
+                                aria-expanded="false" aria-controls="<?php echo $row["product_name"]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            <?php }?>
+                            <?php if($key==1){?>
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php echo $row["product_name"]; ?>"
+                                aria-expanded="false" aria-controls="<?php echo $row["product_name"]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                          <?php }}?>
+                        </div>
+                        <!-- End this Nav Item -->
+
+                    </div>
+                </div>
+
+            </li>
+
+            <li class="nav-item">
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Pet Food</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <!-- <a class="dropdown-item" href="#">Bird Food</a> -->
+                        <?php
+                        $myquery ="SELECT * FROM products WHERE product_name ='Bird Food'";
+                        $statement = $connect->prepare($myquery);
+                        $statement->execute();
+                        $Bird = $statement->fetchAll();
+                        foreach($Bird as $key => $row)
+                        {
+                        ?>
+                                                
+                        <div class="dropdown dropleft">
+                        <?php if($key < 1){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                        <?php }?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[0]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[0]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                        <?php }?>
+                        </div>
+
+                        <?php
+                        $myquery ="SELECT * FROM products WHERE product_name ='Cat Food'";
+                        $statement = $connect->prepare($myquery);
+                        $statement->execute();
+                        $Cat = $statement->fetchAll();
+                        foreach($Cat as $key => $row)
+                        {
+                        ?>
+                                                
+                        <div class="dropdown dropleft">
+                        <?php if($key < 1){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                        <?php }?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[0]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[0]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                        <?php }?>
+                        </div>
+                
+                        <?php
+                        $myquery ="SELECT * FROM products WHERE product_name ='Dry Dog Food'";
+                        $statement = $connect->prepare($myquery);
+                        $statement->execute();
+                        $Dog = $statement->fetchAll();
+                        foreach($Dog as $key => $row)
+                        {
+                        ?>
+                        <div class="dropdown dropright">
+                        <?php if($key==0){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[0]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[0]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            <?php }?>
+                            <?php if($key==1){?>
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[0]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[0]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                          <?php }}?>
+                        </div>
+                        
+                        <?php
+                        $myquery ="SELECT * FROM products WHERE product_name ='Fish Food'";
+                        $statement = $connect->prepare($myquery);
+                        $statement->execute();
+                        $Fish = $statement->fetchAll();
+                        foreach($Fish as $key => $row)
+                        {
+                        ?>
+                                                
+                        <div class="dropdown dropleft">
+                        <?php if($key < 1){?>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">
+                        <?php echo $row["product_name"]; ?>
+                        </a>
+                        <?php }?>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="javascript::void" 
+                                data-toggle="collapse" data-target="#<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[0]; ?>"
+                                aria-expanded="false" aria-controls="<?php $pieces = explode(" ", $row["product_name"]); echo $pieces[0]; ?>">
+                                    <?php echo $row["unit_quantity"]; ?>
+                                </a>
+                            </div>
+                        <?php }?>
+                        </div>
+                        <!-- end product -->
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+    </div>
 
 
 
@@ -268,59 +815,86 @@ if(isset($_GET["clearall"]))
     <div class="top-right-frame">
         <div class="header">
             <h3>Products</h3>
-            
+
             <div class="row container">
 
-                    
-            <?php
-                    $statement = $connect->prepare($query);
-                    $statement->execute();
-                    $result = $statement->fetchAll();
-                    foreach($result as $key => $row)
-                    {
-                    ?>
-                    <?php if($row["product_name"] == "Fish Fingers") 
-                    {?>
-                    
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">                                              
+                <?php
+                $statement = $connect->prepare($query);
+                $statement->execute();
+                $result = $statement->fetchAll();
+                foreach($result as $key => $row)
+                {
+                ?>
+                <?php if($row){ ?>
 
-                            <a href="#"><img class="card-img-top" src="img\FishFingers.jpg" alt=""></a>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="collapse" 
+                    id="<?php 
+                    if(strpos($row['product_name'], ' ') !== false) {
+                        // explodable
+                        $pieces = explode(" ", $row["product_name"]); 
+                        if($pieces[1] =='')
+                        { 
+                            echo $row["product_name"]; 
+                        }                        
+                        elseif ($pieces[1] !='')
+                        {
+                            if ( isset($pieces[1]) && $pieces[1]== 'Food' ){
+                                echo $pieces[0]; 
+                            }elseif ( isset($pieces[2]) && $pieces[2]!= 'Food'){
+                                echo $pieces[2]; 
+                            }elseif ( isset($pieces[2]) && $pieces[2]== 'Food'){
+                                echo $pieces[0]; 
+                            }elseif ( !isset($pieces[2]) ){
+                                echo $pieces[1]; 
+                            }
+                            else{}
+
+                        }else{}     
+                    } else {
+                        echo $row["product_name"]; 
+                    }                                
+                    ?>">
+
+                        <div class="card h-100">
+
+                        <a href="#"><img class="card-img-top" src="img\<?php echo $row["product_name"]?>.jpg" alt=""></a>
+
                             <form method="post">
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#"><?php echo $row["product_name"]; ?></a>
-                                </h4>
-                                <h5>$ <?php echo $row["unit_price"]; ?></h5>
-                                <p class="card-text">Quantity : <?php echo $row["unit_quantity"]; ?></p>
-                                <p class="card-text">In-Stock : <?php echo $row["in_stock"]; ?></p>
-                                
-                                <input type="number" name="quantity" value="1" class="form-control" />
-                                <input type="hidden" name="hidden_name" value="<?php echo $row["product_name"]; ?>" />
-                                <input type="hidden" name="hidden_price" value="<?php echo $row["unit_price"]; ?>" />
-                                <input type="hidden" name="hidden_id" value="<?php echo $row["product_id"]; ?>" />
-                            </div>                            
-                                                        
-                            <div class="card-footer">
-                                <small class="container">
-                                    <input type="submit" name="add_to_cart" style="margin-top:5px;" 
-                                    class="btn btn-outline-success btn-standard" value="Add to Cart" />
-                                </small>
-                                
-                            </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="#"><?php echo $row["product_name"]; ?></a>
+                                    </h4>
+                                    <h5>$ <?php echo $row["unit_price"]; ?></h5>
+                                    <p class="card-text">Quantity : <?php echo $row["unit_quantity"]; ?></p>
+                                    <p class="card-text">In-Stock : <?php echo $row["in_stock"]; ?></p>
+
+                                    <input type="number" name="quantity" value="1" class="form-control" />
+                                    <input type="hidden" name="hidden_name" value="<?php echo $row["product_name"]; ?>" />
+                                    <input type="hidden" name="hidden_price" value="<?php echo $row["unit_price"]; ?>" />
+                                    <input type="hidden" name="hidden_id" value="<?php echo $row["product_id"]; ?>" />
+                                </div>
+
+                                <div class="card-footer">
+                                    <small class="container">
+                                        <input type="submit" name="add_to_cart" style="margin-top:5px;"
+                                        class="btn btn-outline-success btn-standard" value="Add to Cart" />
+                                    </small>
+
+                                </div>
                             </form>
                         </div>
                     </div>
+                </div>
 
-                    
-                    <?php }else{?>
-                    <!-- Else OR NOimage part  -->
+                <?php }else{?>
+                <!-- Else OR NOimage part  -->
 
-                    <?php
-                    }
-                    // break;
-                    }
-                    ?>
+                <?php
+                }
+                // break;
+                }
+                ?>
 
             </div>
         </div>
@@ -335,6 +909,7 @@ if(isset($_GET["clearall"]))
                 </div>
                 <br/>
                 <table class="table table-bordered table-dark">
+                  <thead>
                     <tr>
                     <th width="25%">Item Name</th>
                     <th width="10%">In Stock</th>
@@ -342,6 +917,7 @@ if(isset($_GET["clearall"]))
                     <th width="15%">Total</th>
                     <th width="5%">Action</th>
                     </tr>
+                  </thead>
                 <?php
                 if(isset($_COOKIE["shopping_cart"]))
                 {
@@ -351,6 +927,7 @@ if(isset($_GET["clearall"]))
                     foreach($cart_data as $keys => $values)
                     {
                 ?>
+                <tbody>
                     <tr>
                     <td><?php echo $values["product_name"]; ?></td>
                     <td><?php echo $values["in_stock"]; ?></td>
@@ -358,7 +935,7 @@ if(isset($_GET["clearall"]))
                     <td>$ <?php echo number_format($values["in_stock"] * $values["unit_price"], 2);?></td>
                     <td><a href="index.php?action=delete&id=<?php echo $values["product_id"]; ?>" class="btn btn-sm btn-danger">Remove</a></td>
                     </tr>
-                <?php 
+                <?php
                     $total = $total + ($values["in_stock"] * $values["unit_price"]);
                     }
                 ?>
@@ -367,6 +944,8 @@ if(isset($_GET["clearall"]))
                     <td align="right">$ <?php echo number_format($total, 2); ?></td>
                     <td></td>
                     </tr>
+                </tbody>
+
                 <?php
                 }
                 else
@@ -386,7 +965,7 @@ if(isset($_GET["clearall"]))
     <!-- Back-To-Top -->
     <a href="#" id="back-to-top" style="display: none;"><span></span></a>
 
-    
+
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -395,7 +974,7 @@ if(isset($_GET["clearall"]))
     <script src="js/fontawesome.min.js"></script>
 
     <script src="vendor/jquery/jquery.min.js"></script>
-    
+
     <!-- JS for Back To TOP -->
     <script>
         $(document).ready(function() {
