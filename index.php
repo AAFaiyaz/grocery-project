@@ -151,11 +151,11 @@ if(isset($_GET["clearall"]))
 
         if(!$mail->send()) {
             echo '
-            <div class="alert alert-warning alert-dismissible">
+            <div class="alert alert-danger alert-dismissible">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 Email failed to sent!
             </div>';
-            echo 'Mailer Error: ' . $mail->ErrorInfo;
+            // echo 'Mailer Error: ' . $mail->ErrorInfo;
         } else {
             echo '
             <div class="alert alert-success alert-dismissible">
@@ -1047,38 +1047,36 @@ if(isset($_GET["clearall"]))
                     <div class="collapse" id="collapseExample">
                         <form class="form-horizontal" action="" method="post">
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="uname">Name:</label>
+                                <label style="float: left" class="control-label label col-auto" for="uname">Name:</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="uname" placeholder="Enter Your Name">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="address">Address:</label>
+                                <label style="float: left" class="control-label label col-auto" for="email">Email:</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label style="float: left" class="control-label label col-auto" for="address">Address:</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="address" placeholder="Enter Your Address">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="suburb">Suburb:</label>
+                                <label style="float: left" class="control-label label col-auto" for="suburb">Suburb:</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="suburb" placeholder="Enter Your Suburb">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="state">State:</label>
+                                <label style="float: left" class="control-label label col-auto" for="state">State:</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="state" placeholder="Enter Your Address">
                                 </div>
-                            </div>  
-                          
-                              
-                        
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="email">Email:</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
-                                </div>
-                            </div>
+                            </div>                                                        
+            
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button type="submit" name="sendmail" class="btn btn-funky">Submit</button>
@@ -1088,9 +1086,8 @@ if(isset($_GET["clearall"]))
                     </div>
 
                 </div>
-                
-                
-                </div>
+                                
+            </div>
         </div>
     </div>
 
