@@ -122,7 +122,7 @@ if(isset($_GET["clearall"]))
 
         $mail = new PHPMailer;
 
-        $mail->SMTPDebug = 4;                               // Enable verbose debug output
+        // $mail->SMTPDebug = 4;                               // Enable verbose debug output
 
         $mail->isSMTP();                                      // Set mailer to use SMTP
         $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
@@ -150,10 +150,18 @@ if(isset($_GET["clearall"]))
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         if(!$mail->send()) {
-            echo 'Message could not be sent.';
+            echo '
+            <div class="alert alert-warning alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Email failed to sent!
+            </div>';
             echo 'Mailer Error: ' . $mail->ErrorInfo;
         } else {
-            echo 'Message has been sent';
+            echo '
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Email has been sent.
+            </div>';
         }
     }
 
