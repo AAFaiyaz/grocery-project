@@ -112,6 +112,51 @@ if(isset($_GET["clearall"]))
  ';
 }
 
+
+// For SENDING EMAIL
+
+    if (isset($_POST['sendmail'])) {
+
+        require 'PHPMailerAutoload.php';
+        require 'credential.php';
+
+        $mail = new PHPMailer;
+
+        $mail->SMTPDebug = 4;                               // Enable verbose debug output
+
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = EMAIL;                 
+        // SMTP username
+        $mail->Password = PASS;                           
+        // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 587;                                    // TCP port to connect to
+
+        $mail->setFrom(EMAIL, 'Testing Mail Service');
+        $mail->addAddress($_POST['email']);     
+        // Name is optional
+        $mail->addReplyTo(EMAIL);
+        
+
+        // Add attachments
+        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    
+        // Optional name
+        $mail->isHTML(true);                                  // Set email format to HTML
+
+        $mail->Subject = 'Here is the subject';
+        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+        if(!$mail->send()) {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            echo 'Message has been sent';
+        }
+    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -930,9 +975,9 @@ if(isset($_GET["clearall"]))
             <h3>Checkout Cart</h3>
             <div class="table-responsive">
                 <?php echo $message; ?>
-                <div align="right">
+                <!-- <div align="right">
                     <a href="index.php?action=clear" class="btn btn-info"><b>Clear Cart</b></a>
-                </div>
+                </div> -->
                 <br/>
                 <table class="table table-bordered table-dark">
                   <thead>
@@ -970,6 +1015,7 @@ if(isset($_GET["clearall"]))
                     <td align="right">$ <?php echo number_format($total, 2); ?></td>
                     <td></td>
                     </tr>
+
                 </tbody>
 
                 <?php
@@ -983,7 +1029,59 @@ if(isset($_GET["clearall"]))
                     ';
                 }
                 ?>
+
                 </table>
+                <div>
+                    <div align="right">
+                        <a data-toggle="collapse" href="#collapseExample" class="btn btn-dark">Proceed</a>
+                        <a href="index.php?action=clear" class="btn btn-info"><b>Clear Cart</b></a>
+                    </div>
+                    <div class="collapse" id="collapseExample">
+                        <form class="form-horizontal" action="" method="post">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="uname">Name:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="uname" placeholder="Enter Your Name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="address">Address:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="address" placeholder="Enter Your Address">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="suburb">Suburb:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="suburb" placeholder="Enter Your Suburb">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="state">State:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="state" placeholder="Enter Your Address">
+                                </div>
+                            </div>  
+                          
+                              
+                        
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="email">Email:</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" name="sendmail" class="btn btn-default">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                
+                
                 </div>
         </div>
     </div>
