@@ -950,10 +950,10 @@ if(isset($_GET["clearall"]))
                 <?php
                 if(isset($_COOKIE["shopping_cart"]))
                 {
-                    $productName="";
-                    $inStock="";
-                    $unitPrice="";
-                    $totalEachProduct="";
+                    $productName[]="";
+                    $inStock[]="";
+                    $unitPrice[]="";
+                    $totalEachProduct[]="";
                     $totalAllProduct="";
 
                     $total = 0;
@@ -964,10 +964,10 @@ if(isset($_GET["clearall"]))
                 ?>
                 <tbody>
                     <tr>
-                    <td><?php echo $values["product_name"]; $productName=$values["product_name"]; ?></td>
-                    <td><?php echo $values["in_stock"]; $inStock=$values["in_stock"]; ?></td>
-                    <td>$ <?php echo $values["unit_price"]; $unitPrice=$values["unit_price"]; ?></td>
-                    <td>$ <?php echo number_format($values["in_stock"] * $values["unit_price"], 2); $totalEachProduct=number_format($values["in_stock"] * $values["unit_price"], 2); ?></td>
+                    <td><?php echo $values["product_name"]; $productName[$keys]=$values["product_name"]; ?></td>
+                    <td><?php echo $values["in_stock"]; $inStock[$keys]=$values["in_stock"]; ?></td>
+                    <td>$ <?php echo $values["unit_price"]; $unitPrice[$keys]=$values["unit_price"]; ?></td>
+                    <td>$ <?php echo number_format($values["in_stock"] * $values["unit_price"], 2); $totalEachProduct[$keys]=number_format($values["in_stock"] * $values["unit_price"], 2); ?></td>
                     <td><a href="index.php?action=delete&id=<?php echo $values["product_id"]; ?>" class="btn btn-sm btn-danger">Remove</a></td>
                     </tr>
                 <?php
@@ -994,24 +994,20 @@ if(isset($_GET["clearall"]))
                         // $mail->SMTPDebug = 4;                               // Enable verbose debug output
 
                         $mail->isSMTP();                                      // Set mailer to use SMTP
-                        $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+                        $mail->Host = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
                         $mail->SMTPAuth = true;                               // Enable SMTP authentication
                         $mail->Username = EMAIL;                 
-                        // SMTP username
+
                         $mail->Password = PASS;                           
-                        // SMTP password
+
                         $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
                         $mail->Port = 587;                                    // TCP port to connect to
 
                         $mail->setFrom(EMAIL, 'Testing Mail Service');
                         $mail->addAddress($_POST['email']);     
-                        // Name is optional
-                        $mail->addReplyTo(EMAIL);
-                        
 
-                        // Add attachments
-                        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    
-                        // Optional name
+                        $mail->addReplyTo(EMAIL);
+
                         $mail->isHTML(true);                                  // Set email format to HTML
 
                         $mail->Subject = 'Recipt Grocery Products List';
@@ -1022,19 +1018,34 @@ if(isset($_GET["clearall"]))
                         <table class="table table-bordered table-dark">
                         <thead>
                           <tr>
-                          <th width="25%">Item Name</th>
+                          <th width="20%">Item Name</th>
                           <th width="10%">In Stock</th>
-                          <th width="20%">Price</th>
-                          <th width="15%">Total</th>
+                          <th width="10%">Price</th>
+                          <th width="10%">Total</th>
                           </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <td>'. $productName .  '</td>
-                            <td> '. $inStock .  ' </td>
-                            <td>$ '. $unitPrice .  ' </td>
-                            <td>$ '. $totalEachProduct .  ' </td>
-                            </tr>
+                        ';
+
+                        foreach($productName as $keys => $names)
+                        {
+                            $mail->Body .= ' '. $names .  ' ' ; 
+                        }
+                        foreach($inStock as $keys => $stocks)
+                        {
+                            $mail->Body .= ' '. $stocks .  ' ' ; 
+                        }
+                        foreach($unitPrice as $keys => $prices)
+                        {
+                            $mail->Body .= ' '. $prices .  ' ' ;    
+                        }
+                        foreach($totalEachProduct as $keys => $eachProducts)
+                        {
+                            $mail->Body .= ' '. $eachProducts .  ' ' ;                            
+                        }
+
+                        $mail->Body .= 
+                        '                            
                             <tr>
                             <td colspan="3" align="right">Total</td>
                             <td align="right">$ '. $totalAllProduct.  ' </td>
