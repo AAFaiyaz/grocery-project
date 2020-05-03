@@ -113,57 +113,7 @@ if(isset($_GET["clearall"]))
 }
 
 
-// For SENDING EMAIL
 
-    if (isset($_POST['sendmail'])) {
-
-        require 'PHPMailerAutoload.php';
-        require 'credential.php';
-
-        $mail = new PHPMailer;
-
-        // $mail->SMTPDebug = 4;                               // Enable verbose debug output
-
-        $mail->isSMTP();                                      // Set mailer to use SMTP
-        $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-        $mail->SMTPAuth = true;                               // Enable SMTP authentication
-        $mail->Username = EMAIL;                 
-        // SMTP username
-        $mail->Password = PASS;                           
-        // SMTP password
-        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-        $mail->Port = 587;                                    // TCP port to connect to
-
-        $mail->setFrom(EMAIL, 'Testing Mail Service');
-        $mail->addAddress($_POST['email']);     
-        // Name is optional
-        $mail->addReplyTo(EMAIL);
-        
-
-        // Add attachments
-        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    
-        // Optional name
-        $mail->isHTML(true);                                  // Set email format to HTML
-
-        $mail->Subject = 'Here is the subject';
-        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-        if(!$mail->send()) {
-            echo '
-            <div class="alert alert-danger alert-dismissible">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                Email failed to sent!
-            </div>';
-            // echo 'Mailer Error: ' . $mail->ErrorInfo;
-        } else {
-            echo '
-            <div class="alert alert-success alert-dismissible">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                Email has been sent.
-            </div>';
-        }
-    }
 
 ?>
 <!DOCTYPE html>
@@ -1000,6 +950,12 @@ if(isset($_GET["clearall"]))
                 <?php
                 if(isset($_COOKIE["shopping_cart"]))
                 {
+                    $productName="";
+                    $inStock="";
+                    $unitPrice="";
+                    $totalEachProduct="";
+                    $totalAllProduct="";
+
                     $total = 0;
                     $cookie_data = stripslashes($_COOKIE['shopping_cart']);
                     $cart_data = json_decode($cookie_data, true);
@@ -1008,10 +964,10 @@ if(isset($_GET["clearall"]))
                 ?>
                 <tbody>
                     <tr>
-                    <td><?php echo $values["product_name"]; ?></td>
-                    <td><?php echo $values["in_stock"]; ?></td>
-                    <td>$ <?php echo $values["unit_price"]; ?></td>
-                    <td>$ <?php echo number_format($values["in_stock"] * $values["unit_price"], 2);?></td>
+                    <td><?php echo $values["product_name"]; $productName=$values["product_name"]; ?></td>
+                    <td><?php echo $values["in_stock"]; $inStock=$values["in_stock"]; ?></td>
+                    <td>$ <?php echo $values["unit_price"]; $unitPrice=$values["unit_price"]; ?></td>
+                    <td>$ <?php echo number_format($values["in_stock"] * $values["unit_price"], 2); $totalEachProduct=number_format($values["in_stock"] * $values["unit_price"], 2); ?></td>
                     <td><a href="index.php?action=delete&id=<?php echo $values["product_id"]; ?>" class="btn btn-sm btn-danger">Remove</a></td>
                     </tr>
                 <?php
@@ -1020,13 +976,93 @@ if(isset($_GET["clearall"]))
                 ?>
                     <tr>
                     <td colspan="3" align="right">Total</td>
-                    <td align="right">$ <?php echo number_format($total, 2); ?></td>
+                    <td align="right">$ <?php echo number_format($total, 2); $totalAllProduct=number_format($total, 2); ?></td>
                     <td></td>
                     </tr>
 
                 </tbody>
 
                 <?php
+                    // For SENDING EMAIL
+                    if (isset($_POST['sendmail'])) {
+
+                        require 'PHPMailerAutoload.php';
+                        require 'credential.php';
+
+                        $mail = new PHPMailer;
+
+                        // $mail->SMTPDebug = 4;                               // Enable verbose debug output
+
+                        $mail->isSMTP();                                      // Set mailer to use SMTP
+                        $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+                        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                        $mail->Username = EMAIL;                 
+                        // SMTP username
+                        $mail->Password = PASS;                           
+                        // SMTP password
+                        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+                        $mail->Port = 587;                                    // TCP port to connect to
+
+                        $mail->setFrom(EMAIL, 'Testing Mail Service');
+                        $mail->addAddress($_POST['email']);     
+                        // Name is optional
+                        $mail->addReplyTo(EMAIL);
+                        
+
+                        // Add attachments
+                        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    
+                        // Optional name
+                        $mail->isHTML(true);                                  // Set email format to HTML
+
+                        $mail->Subject = 'Recipt Grocery Products List';
+                                                
+                        $mail->Body    = 
+                        '
+                        <h2>Recipt Grocery Products List</h2>
+                        <table class="table table-bordered table-dark">
+                        <thead>
+                          <tr>
+                          <th width="25%">Item Name</th>
+                          <th width="10%">In Stock</th>
+                          <th width="20%">Price</th>
+                          <th width="15%">Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td>'. $productName .  '</td>
+                            <td> '. $inStock .  ' </td>
+                            <td>$ '. $unitPrice .  ' </td>
+                            <td>$ '. $totalEachProduct .  ' </td>
+                            </tr>
+                            <tr>
+                            <td colspan="3" align="right">Total</td>
+                            <td align="right">$ '. $totalAllProduct.  ' </td>
+                            <td></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        '
+                        ;
+                        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                        if(!$mail->send()) {
+                            echo '
+                            <div class="alert alert-danger alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                Email failed to sent!
+                            </div>';
+                            // echo 'Mailer Error: ' . $mail->ErrorInfo;
+                        } else {
+                            echo '
+                            <div class="alert alert-success alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                Email has been sent.
+                            </div>';
+                        }
+                    }
+                    // ending SENDING EMAIL
+
                 }
                 else
                 {
