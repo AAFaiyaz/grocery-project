@@ -1003,7 +1003,7 @@ if(isset($_GET["clearall"]))
                         $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
                         $mail->Port = 587;                                    // TCP port to connect to
 
-                        $mail->setFrom(EMAIL, 'Testing Mail Service');
+                        $mail->setFrom(EMAIL, 'Grocery Mail Service');
                         $mail->addAddress($_POST['email']);     
 
                         $mail->addReplyTo(EMAIL);
@@ -1018,7 +1018,8 @@ if(isset($_GET["clearall"]))
                         <table class="table table-bordered table-dark">
                         <thead>
                           <tr>
-                          <th width="20%">Item Name</th>
+                          <th width="10%">No.</th>
+                          <th width="10%">Item Name</th>
                           <th width="10%">In Stock</th>
                           <th width="10%">Price</th>
                           <th width="10%">Total</th>
@@ -1027,23 +1028,17 @@ if(isset($_GET["clearall"]))
                         <tbody>
                         ';
 
-                        foreach($productName as $keys => $names)
+                        foreach ($productName as $keys => $names)
                         {
-                            $mail->Body .= ' '. $names .  ' ' ; 
+                                $mail->Body .= '<tr>';
+                                $mail->Body .= '<td width="10%"> '.($keys+1).' </td>';
+                                $mail->Body .= '<td width="10%"> '.$names.' </td>';
+                                $mail->Body .= '<td width="10%"> '.$inStock[$keys].' </td>';
+                                $mail->Body .= '<td width="10%"> '.$unitPrice[$keys].' </td>';
+                                $mail->Body .= '<td width="10%"> '.$totalEachProduct[$keys].' </td>';
+                                $mail->Body .= '<tr>';
                         }
-                        foreach($inStock as $keys => $stocks)
-                        {
-                            $mail->Body .= ' '. $stocks .  ' ' ; 
-                        }
-                        foreach($unitPrice as $keys => $prices)
-                        {
-                            $mail->Body .= ' '. $prices .  ' ' ;    
-                        }
-                        foreach($totalEachProduct as $keys => $eachProducts)
-                        {
-                            $mail->Body .= ' '. $eachProducts .  ' ' ;                            
-                        }
-
+    
                         $mail->Body .= 
                         '                            
                             <tr>
